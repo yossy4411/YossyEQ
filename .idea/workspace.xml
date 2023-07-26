@@ -4,8 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e62cc188-2d27-4f74-9ead-fb7d1460565e" name="変更" comment="津波表示システム、設定ファイル、地域色塗りの追加">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/test/RoundedLineExample.java" afterDir="false" />
+    <list default="true" id="e62cc188-2d27-4f74-9ead-fb7d1460565e" name="変更" comment="地域震度観測情報の表示を追加、パフォーマンス改善（マップ簡略化&#10;を含む）">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/colorConverter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/Map.java" afterDir="false" />
@@ -52,7 +52,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/yaido/IdeaProjects/YossyEQ/src/main/resources/com/yossy4411/yossyeq/tsunami",
+    "last_opened_file_path": "C:/Users/yaido/IdeaProjects/YossyEQ/src/main/resources/com/yossy4411/yossyeq/jp1",
     "project.structure.last.edited": "プロジェクト",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.0",
@@ -62,11 +62,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\yaido\IdeaProjects\YossyEQ\src\main\resources\com\yossy4411\yossyeq\tsunami" />
       <recent name="C:\Users\yaido\IdeaProjects\YossyEQ\src\main\resources\com\yossy4411\yossyeq\jp1" />
+      <recent name="C:\Users\yaido\IdeaProjects\YossyEQ\src\main\resources" />
+      <recent name="C:\Users\yaido\IdeaProjects\YossyEQ\src\main\resources\com\yossy4411\yossyeq\tsunami" />
       <recent name="C:\Users\yaido\IdeaProjects\YossyEQ\src\main\resources\com\yossy4411\yossyeq\Lakes" />
       <recent name="C:\Users\yaido\IdeaProjects\YossyEQ\src\main\resources\com\yossy4411\yossyeq\WorldHq" />
-      <recent name="C:\Users\yaido\IdeaProjects\YossyEQ\src\main\resources\com\yossy4411\yossyeq\WorldLq" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\yaido\IdeaProjects\YossyEQ\src\main\resources\com\yossy4411\yossyeq" />
@@ -143,7 +143,23 @@
       <option name="project" value="LOCAL" />
       <updated>1690333870429</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="津波表示システム、設定ファイル、地域色塗りの追加">
+      <option name="closed" value="true" />
+      <created>1690334038948</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1690334038948</updated>
+    </task>
+    <task id="LOCAL-00006" summary="地域震度観測情報の表示を追加、パフォーマンス改善（マップ簡略化&#10;を含む）">
+      <option name="closed" value="true" />
+      <created>1690370989506</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1690370989507</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -178,7 +194,8 @@
     <MESSAGE value="README.mdを変更" />
     <MESSAGE value="Add README.md" />
     <MESSAGE value="津波表示システム、設定ファイル、地域色塗りの追加" />
-    <option name="LAST_COMMIT_MESSAGE" value="津波表示システム、設定ファイル、地域色塗りの追加" />
+    <MESSAGE value="地域震度観測情報の表示を追加、パフォーマンス改善（マップ簡略化&#10;を含む）" />
+    <option name="LAST_COMMIT_MESSAGE" value="地域震度観測情報の表示を追加、パフォーマンス改善（マップ簡略化&#10;を含む）" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
