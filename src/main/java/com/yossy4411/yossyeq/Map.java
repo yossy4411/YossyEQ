@@ -11,6 +11,7 @@ import javafx.scene.input.ScrollEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Polygon;
+import javafx.scene.shape.Polyline;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -25,13 +26,13 @@ import org.locationtech.jts.geom.MultiPolygon;
 import org.opengis.feature.simple.SimpleFeature;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Random;
+import java.util.Arrays;
+import java.util.*;
 
 
 public class Map extends Application {
@@ -43,13 +44,15 @@ public class Map extends Application {
     private double zoomFactor = 1.0;
     private final float roughness = 1f;
     private double zoomFactor2;
+    private List<String> Config = new ArrayList<>();
     private Point2D scroll = new Point2D(0,0);
 
     private final List<List<List<List<Point2D>>>> geometryPolygons = new ArrayList<>();
     private final List<List<Point2D>> Points = new ArrayList<>();
     private final List<List<String>> Names = new ArrayList<>();
     private final List<List<Color>> Colors = new ArrayList<>();
-    private Group map,world,monitor,japan;
+    private Group map,world,monitor,japan,tsunami;
+    private final String[] configArray = {"darkmode"};
 
     public static void main(String[] args) {
         launch(args);
@@ -59,27 +62,39 @@ public class Map extends Application {
 
         windowWidth = 800; // ウィンドウ横幅
         windowHeight = 600; // ウィンドウ縦幅
-
+        readProperties();
+        addPoint("src/main/resources/kyoshinMonitorPlaces.json");
         calcFromShapefile("src/main/resources/com/yossy4411/yossyeq/WorldMq/ne_50m_land.shp");
         calcFromShapefile("src/main/resources/com/yossy4411/yossyeq/jp1/地震情報／細分区域.shp");
-        addPoint("src/main/resources/kyoshinMonitorPlaces.json");
-
+        calcFromShapefile("src/main/resources/com/yossy4411/yossyeq/jp1/地震情報／都道府県等.shp");
+        calcTsunami();
 
         map = new Group();
-        monitor = new Group();
-        japan = new Group();
         world = new Group();
-
+        japan = new Group();
+        tsunami = new Group();
+        monitor = new Group();
         Group root = new Group();
+
         root.getChildren().add(map);
+        map.getChildren().add(tsunami);
         map.getChildren().add(world);
         map.getChildren().add(japan);
+
         map.getChildren().add(monitor);
+
         Scene scene = new Scene(root, windowWidth, windowHeight);
         addColor();
         zoomMapping();
+        zoomFactor  =9.5;
+        Point2D home = convertLatLngToScreen(35.5,-135);
+        map.setTranslateX(home.getX() - windowWidth / 2);
+        map.setTranslateY(windowHeight / 2 - home.getY());
+        drawTsunami();
         drawPolygons();
         drawKyoshinMonitor();
+
+        translateMapping();
 
         // マウスのドラッグ操作ハンドリング
         scene.setOnMousePressed(event -> {
@@ -116,13 +131,29 @@ public class Map extends Application {
 
 
         scene.setOnScroll(this::handleScroll);
-        scene.setFill(Color.valueOf("#0B0C1C")); // 背景色
+
         scene.setFill(Color.WHITE);
+        if(Objects.equals(getProperties("darkmode"), "true")){scene.setFill(Color.valueOf("#1a1a1a"));}
         stage.setTitle("マップ");
         stage.setScene(scene);
         stage.show();
     }
+    private void readProperties(){
+        Properties properties = new Properties();
 
+        try (InputStream input = new FileInputStream("src/main/resources/config.properties")) {
+            properties.load(input);
+            for (String s : configArray) {
+                Config.add(properties.getProperty(s));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private String getProperties(String array){
+        int index = Arrays.asList(configArray).indexOf(array);
+        return Config.get(index);
+    }
     private void drawPolygons() {
         scroll = new Point2D(map.getTranslateX(), map.getTranslateY());
         List<List<List<Point2D>>> geometries = geometryPolygons.get(0);
@@ -146,8 +177,10 @@ public class Map extends Application {
                 }
                 if (polygon.getPoints().size() > 2 && outCount < polygon.getPoints().size()) {//完全に画面外または線点になるものを描画しない
                     //ポリゴンのスタイルを設定
-                    polygon.setFill(Color.DARKGRAY);
+                    polygon.setFill(Color.valueOf("9D9D9DFF"));
+                    if(Objects.equals(getProperties("darkmode"), "true")){polygon.setFill(Color.GRAY);}
                     polygon.setStroke(Color.GRAY);
+                    if(Objects.equals(getProperties("darkmode"), "true")){polygon.setStroke(Color.DARKGRAY);}
                     polygon.setStrokeWidth(zoomFactor2);
                     world.getChildren().add(polygon);
                 }
@@ -167,7 +200,7 @@ public class Map extends Application {
                 int outCount = 0;
                 for (Point2D point : point2DS) {//ポリゴンを取得
                     point = convertLatLngToScreen(point.getX(), point.getY());//画面上の座標に変換
-                    boolean outWindow = Math.abs(point.getX() + map.getTranslateX() - windowWidth / 2) > windowWidth * (0.5+ roughness) || Math.abs(point.getY() + map.getTranslateY() - windowHeight / 2) > windowHeight * (0.5+roughness);//ウィンドウ外かどうか
+                    boolean outWindow = Math.abs(point.getX() + map.getTranslateX() - windowWidth / 2) > windowWidth * roughness || Math.abs(point.getY() + map.getTranslateY() - windowHeight / 2) > windowHeight *roughness;//ウィンドウ外かどうか
                     if (!outWindow&&(point.distance(distPoint) > 1 || distPoint.equals(new Point2D(1800, 900)))) {//ポリゴンを簡略化
                         polygon.getPoints().addAll(point.getX(), point.getY());
                         distPoint = point;
@@ -179,15 +212,97 @@ public class Map extends Application {
                 }
                 if (polygon.getPoints().size() > 2 && outCount < polygon.getPoints().size()) {//完全に画面外または線or点になるものを描画しない
                     //ポリゴンのスタイルを設定
-                    polygon.setFill(Colors.get(0).get(i));
-                    polygon.setStroke(Color.BLACK);
+                    Color color = Colors.get(0).get(i);
+                    polygon.setFill(color);
+                    polygon.setStroke(color.darker());
+                    if(Objects.equals(getProperties("darkmode"), "true")){polygon.setStroke(color.brighter());}
                     polygon.setStrokeWidth(zoomFactor2);
                     japan.getChildren().add(polygon);
                 }
             }
         }
+        geometries = geometryPolygons.get(2);
+        Group strokes = new Group();
+        for (List<List<Point2D>> geometry : geometries) {//地物を取得
+            for (List<Point2D> point2DS : geometry) {//シェイプを取得
+                Polyline polygon = new Polyline();
+                Point2D distPoint = new Point2D(1800, 900);
+                int outCount = 0;
+                for (Point2D point : point2DS) {//ポリゴンを取得
+                    point = convertLatLngToScreen(point.getX(), point.getY());//画面上の座標に変換
+                    boolean outWindow = Math.abs(point.getX() + map.getTranslateX() - windowWidth / 2) > windowWidth * roughness || Math.abs(point.getY() + map.getTranslateY() - windowHeight / 2) > windowHeight * roughness;//ウィンドウ外かどうか
+                    if (!outWindow && (point.distance(distPoint) > 1 || distPoint.equals(new Point2D(1800, 900)))) {//ポリゴンを簡略化
+                        polygon.getPoints().addAll(point.getX(), point.getY());
+                        distPoint = point;
+                    } else if (outWindow && point.distance(distPoint) > 200) {
+                        polygon.getPoints().addAll(point.getX(), point.getY());
+                        distPoint = point;
+                        outCount++;
+                    }
+                }
+                if (polygon.getPoints().size() > 2 && outCount < polygon.getPoints().size()) {//完全に画面外または線or点になるものを描画しない
+                    //ポリゴンのスタイルを設定
+                    polygon.setStroke(Color.WHITESMOKE);
+                    if (Objects.equals(getProperties("darkmode"), "true")) {
+                        polygon.setStroke(Color.WHITESMOKE);
+                    }
+                    polygon.setStrokeWidth(zoomFactor2 * Math.sqrt(Math.sqrt(zoomFactor)) / 2);
+                    strokes.getChildren().add(polygon);
+                }
+            }
+        }
+        japan.getChildren().add(strokes);
     }
-
+    private void drawTsunami(){
+        tsunami.getChildren().clear();
+        List<List<List<Point2D>>> geometries = geometryPolygons.get(3);
+        Group strokes = new Group();
+        for (int i = 0;i<geometries.size();i++) {//地物を取得
+            List<List<Point2D>> geometry = geometries.get(i);
+            for (List<Point2D> point2DS : geometry) {//シェイプを取得
+                Polyline polygon = new Polyline();
+                Point2D distPoint = new Point2D(1800, 900);
+                int outCount = 0;
+                for (Point2D point : point2DS) {//ポリゴンを取得
+                    point = convertLatLngToScreen(point.getX(), point.getY());//画面上の座標に変換
+                    boolean outWindow = Math.abs(point.getX() + map.getTranslateX() - windowWidth / 2) > windowWidth * roughness || Math.abs(point.getY() + map.getTranslateY() - windowHeight / 2) > windowHeight * roughness;//ウィンドウ外かどうか
+                    if (!outWindow && (point.distance(distPoint) > 1 || distPoint.equals(new Point2D(1800, 900)))) {//ポリゴンを簡略化
+                        polygon.getPoints().addAll(point.getX(), point.getY());
+                        distPoint = point;
+                    } else if (outWindow && point.distance(distPoint) > 200) {
+                        polygon.getPoints().addAll(point.getX(), point.getY());
+                        distPoint = point;
+                        outCount++;
+                    }
+                }
+                if (polygon.getPoints().size() > 2 && outCount < polygon.getPoints().size()) {//完全に画面外または線or点になるものを描画しない
+                    //ポリゴンのスタイルを設定
+                    Color color = Colors.get(1).get(i);
+                    if (!(color == null)){
+                        Circle circle = new Circle();
+                        Point2D point = convertLatLngToScreen(point2DS.get(1).getX(),point2DS.get(1).getY());
+                        circle.setCenterX(point.getX());
+                        circle.setCenterY(point.getY());
+                        circle.setRadius(Math.sqrt(zoomFactor) * Math.sqrt(3));
+                        circle.setFill(color);
+                        polygon.setStroke(color);
+                        polygon.setStrokeWidth(Math.sqrt(zoomFactor) * 3);
+                        polygon.setStrokeLineJoin(javafx.scene.shape.StrokeLineJoin.ROUND);
+                        strokes.getChildren().add(circle);
+                        circle = new Circle();
+                        point = convertLatLngToScreen(point2DS.get(point2DS.size()-1).getX(),point2DS.get(point2DS.size()-1).getY());
+                        circle.setCenterX(point.getX());
+                        circle.setCenterY(point.getY());
+                        circle.setRadius(Math.sqrt(zoomFactor) * Math.sqrt(3));
+                        circle.setFill(color);
+                        strokes.getChildren().add(circle);
+                        strokes.getChildren().add(polygon);
+                    }
+                }
+            }
+        }
+        tsunami.getChildren().add(strokes);
+    }
     private void drawKyoshinMonitor() {
         monitor.getChildren().clear();
         Group pointsGroup = new Group();
@@ -200,17 +315,18 @@ public class Map extends Application {
             point.setCenterY(position.getY());
             Text text = new Text(Names.get(0).get(i));
             text.setFont((Font.font("Arial", 20)));
-            text.setX(position.getX());
-            text.setY(position.getY());
+            text.setX(position.getX() + 10);
+            text.setY(position.getY() + Math.sqrt(zoomFactor)/3);
             point.setRadius(Math.sqrt(zoomFactor)/1.5);
             point.setFill(Color.BLUE);
             boolean inWindow = Math.abs(point.getCenterX() + map.getTranslateX() - windowWidth / 2) < windowWidth / 2 + point.getRadius()&& Math.abs(point.getCenterY() + map.getTranslateY() - windowHeight / 2) < windowHeight /2+ point.getRadius();
-            if (inWindow && Objects.equals(Names.get(1).get(i), "false")) {monitor.getChildren().add(point);
+            if (inWindow && Objects.equals(Names.get(1).get(i), "false")) {//monitor.getChildren().add(point);
                 if (zoomFactor > 300){pointsGroup.getChildren().add(text);}}
         }
-        monitor.getChildren().add(pointsGroup);
+        //monitor.getChildren().add(pointsGroup);
     }
     private void calcFromShapefile(String filePath) throws IOException {
+        boolean isJP = 1 == geometryPolygons.size();
         File file = new File(filePath);
         DataStore dataStore = FileDataStoreFinder.getDataStore(file);
         String[] typeNames = dataStore.getTypeNames();
@@ -219,8 +335,10 @@ public class Map extends Application {
             SimpleFeatureSource source = dataStore.getFeatureSource(typeName);
             SimpleFeatureCollection collection = source.getFeatures();
             try (SimpleFeatureIterator iterator = collection.features()) {
+                List<String> attribute = new ArrayList<>();
                 while (iterator.hasNext()) {
                     SimpleFeature feature = iterator.next();
+                    if (isJP){attribute.add((String) feature.getAttribute("name"));}
 
                     Geometry geometry = (Geometry) feature.getDefaultGeometry();
                     List<List<Point2D>> Polygon = new ArrayList<>();
@@ -246,15 +364,78 @@ public class Map extends Application {
                     }
                     output.add(Polygon);
                 }
+                if (isJP) {
+                    Names.add(attribute);
+                }
             }
         }
         geometryPolygons.add(output);
     }
+    private void calcTsunami() throws IOException {
+        boolean isJP = 1 == geometryPolygons.size();
+        File file = new File("src/main/resources/com/yossy4411/yossyeq/tsunami/津波予報区.shp");
+        DataStore dataStore = FileDataStoreFinder.getDataStore(file);
+        String[] typeNames = dataStore.getTypeNames();
+        List<List<List<Point2D>>> output = new ArrayList<>();
+        for (String typeName : typeNames) {
+            SimpleFeatureSource source = dataStore.getFeatureSource(typeName);
+            SimpleFeatureCollection collection = source.getFeatures();
+
+            try (SimpleFeatureIterator iterator = collection.features()) {
+                List<String> attribute = new ArrayList<>();
+                while (iterator.hasNext()) {
+                    SimpleFeature feature = iterator.next();
+                    attribute.add((String) feature.getAttribute("name"));
+
+                    Geometry geometry = (Geometry) feature.getDefaultGeometry();
+                    if (geometry instanceof org.locationtech.jts.geom.LineString) {
+                        org.locationtech.jts.geom.LineString lineString = (org.locationtech.jts.geom.LineString) geometry;
+                        Coordinate[] coordinates = lineString.getCoordinates();
+                        List<Point2D> points = new ArrayList<>();
+                        for (Coordinate coordinate : coordinates) {
+                            points.add(new Point2D(coordinate.getY(), coordinate.getX()));//座標を格納する
+                        }
+                        List<List<Point2D>> lineSegments = new ArrayList<>();
+                        lineSegments.add(points);
+                        output.add(lineSegments);
+                    } else if (geometry instanceof org.locationtech.jts.geom.MultiLineString multiLineString) {
+                        List<List<Point2D>> lineSegments = new ArrayList<>();
+                        for (int i = 0; i < multiLineString.getNumGeometries(); i++) {
+                            org.locationtech.jts.geom.LineString lineString = (org.locationtech.jts.geom.LineString) multiLineString.getGeometryN(i);
+                            Coordinate[] coordinates = lineString.getCoordinates();
+                            List<Point2D> points = new ArrayList<>();
+                            for (Coordinate coordinate : coordinates) {
+                                points.add(new Point2D(coordinate.getY(), coordinate.getX()));//座標を格納する
+                            }
+                            lineSegments.add(points);
+
+                        }
+                        output.add(lineSegments);
+                    }
+                }
+                Names.add(attribute);
+            }
+        }
+        geometryPolygons.add(output);
+    }
+
+
     private void addColor (){
         List<Color> colorList = new ArrayList<>();
         for (int i = 0;i<geometryPolygons.get(1).size(); i++) {
-            Random random = new Random();
-            colorList.add(Color.rgb(random.nextInt(256), random.nextInt(256), random.nextInt(256)));
+            Color color = Color.valueOf("9D9D9DFF");
+            if(Objects.equals(getProperties("darkmode"), "true")){color = Color.valueOf("#404040FF");}
+            if (Objects.equals(Names.get(2).get(i), "滋賀県南部")){color = Color.valueOf("#32b464");}
+            if (Objects.equals(Names.get(2).get(i), "滋賀県北部")){color = Color.valueOf("#e1e05d");}
+            colorList.add(color);
+        }
+        Colors.add(colorList);
+        colorList = new ArrayList<>();
+        for (int i = 0;i<geometryPolygons.get(3).size(); i++){
+            Color color = null;
+            String tsunamiArray = "";
+            if (!tsunamiArray.contains(Names.get(3).get(i))){color = Color.valueOf("#eb0fff");}
+            colorList.add(color);
         }
         Colors.add(colorList);
     }
@@ -293,10 +474,10 @@ public class Map extends Application {
     いじる場合は自己責任で...
      */
     private void handleScroll(ScrollEvent event) {
-        double scrollDeltaY = event.getDeltaY();
+        double scrollDeltaY = event.getDeltaY() /32;
 
         // ホイール操作による拡大縮小
-        double zoomDelta = 1.3;
+        double zoomDelta = 1 + Math.abs(scrollDeltaY) * 0.5;
         int maxZoom = 1000;
         double minZoom = Math.max(windowWidth / mapSizeX, windowHeight / mapSizeY);
 
@@ -349,7 +530,7 @@ public class Map extends Application {
             }
             if (Math.abs(map.getTranslateX() / zoomFactor) > mapX - windowX / zoomFactor){zoomMapping();}
         }
-        if (Math.abs(map.getTranslateX() - scroll.getX()) > windowWidth / 4 * roughness || Math.abs(map.getTranslateY() - scroll.getY()) > windowHeight/4* roughness){redrawPolygons();}//スクロールしすぎたときに再描画する
+        if (Math.abs(map.getTranslateX() - scroll.getX()) > windowWidth / 2 * roughness || Math.abs(map.getTranslateY() - scroll.getY()) > windowHeight/2* roughness){redrawPolygons();}//スクロールしすぎたときに再描画する
         if (Math.abs(translateY) > mapY - windowY / zoomFactor){
             if (translateY > 0) {
                 map.setTranslateY(mapY * zoomFactor - windowY);
@@ -363,6 +544,7 @@ public class Map extends Application {
     }
     private void redrawPolygons() {
         world.getChildren().clear();
+        drawTsunami();
         drawPolygons();
         drawKyoshinMonitor();
     }
