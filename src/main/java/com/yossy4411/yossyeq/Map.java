@@ -44,7 +44,7 @@ public class Map extends Application {
     private double zoomFactor = 1.0;
     private final float roughness = 1f;
     private double zoomFactor2;
-    private List<String> Config = new ArrayList<>();
+    private final List<String> Config = new ArrayList<>();
     private Point2D scroll = new Point2D(0,0);
 
     private final List<List<List<List<Point2D>>>> geometryPolygons = new ArrayList<>();
@@ -372,7 +372,6 @@ public class Map extends Application {
         geometryPolygons.add(output);
     }
     private void calcTsunami() throws IOException {
-        boolean isJP = 1 == geometryPolygons.size();
         File file = new File("src/main/resources/com/yossy4411/yossyeq/tsunami/津波予報区.shp");
         DataStore dataStore = FileDataStoreFinder.getDataStore(file);
         String[] typeNames = dataStore.getTypeNames();
