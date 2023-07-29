@@ -4,11 +4,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e62cc188-2d27-4f74-9ead-fb7d1460565e" name="変更" comment="地域震度観測情報の表示を追加、パフォーマンス改善（マップ簡略化&#10;を含む）">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/colorConverter.java" afterDir="false" />
+    <list default="true" id="e62cc188-2d27-4f74-9ead-fb7d1460565e" name="変更" comment="地域震度観測情報の表示を追加、パフォーマンス改善（マップ簡略化を含む）">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/CSVReader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/test/CSVReaderExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/test/ColorEditor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/ShindoColor.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/Map.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/colorConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/colorConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/test/RoundedLineExample.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/jp1/地震情報／細分区域.cpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/jp1/地震情報／細分区域.dbf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/jp1/地震情報／細分区域.dbf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/jp1/地震情報／細分区域.prj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/jp1/地震情報／細分区域.qmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/jp1/地震情報／細分区域.shp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/jp1/地震情報／細分区域.shp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/jp1/地震情報／細分区域.shx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/jp1/地震情報／細分区域.shx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/jp1/地震情報／都道府県等.dbf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/jp1/地震情報／都道府県等.dbf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/jp1/地震情報／都道府県等.shp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/jp1/地震情報／都道府県等.shp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/jp1/地震情報／都道府県等.shx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/jp1/地震情報／都道府県等.shx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,7 +72,7 @@
     "project.structure.last.edited": "プロジェクト",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable",
+    "settings.editor.selected.configurable": "preferences.fileTypes",
     "two.files.diff.last.used.file": "C:/Users/yaido/IdeaProjects/YossyEQ/src/main/java/com/yossy4411/yossyeq/test/Rectangle.java"
   }
 }]]></component>
@@ -159,7 +175,23 @@
       <option name="project" value="LOCAL" />
       <updated>1690370989507</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="地域震度観測情報の表示を追加、パフォーマンス改善（マップ簡略化&#10;を含む）">
+      <option name="closed" value="true" />
+      <created>1690377360620</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1690377360620</updated>
+    </task>
+    <task id="LOCAL-00008" summary="地域震度観測情報の表示を追加、パフォーマンス改善（マップ簡略化を含む）">
+      <option name="closed" value="true" />
+      <created>1690377463734</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1690377463734</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -195,7 +227,8 @@
     <MESSAGE value="Add README.md" />
     <MESSAGE value="津波表示システム、設定ファイル、地域色塗りの追加" />
     <MESSAGE value="地域震度観測情報の表示を追加、パフォーマンス改善（マップ簡略化&#10;を含む）" />
-    <option name="LAST_COMMIT_MESSAGE" value="地域震度観測情報の表示を追加、パフォーマンス改善（マップ簡略化&#10;を含む）" />
+    <MESSAGE value="地域震度観測情報の表示を追加、パフォーマンス改善（マップ簡略化を含む）" />
+    <option name="LAST_COMMIT_MESSAGE" value="地域震度観測情報の表示を追加、パフォーマンス改善（マップ簡略化を含む）" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

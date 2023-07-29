@@ -34,8 +34,7 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.*;
 
-import static com.yossy4411.yossyeq.colorConverter.ConvertToScaleAtPolynomialInterpolation;
-
+import static com.yossy4411.yossyeq.colorConverter.*;
 
 public class Map extends Application {
     private double windowWidth,windowHeight;
@@ -53,7 +52,8 @@ public class Map extends Application {
     private final List<List<Point2D>> Points = new ArrayList<>();
     private final List<List<String>> Names = new ArrayList<>();
     private final List<List<Color>> Colors = new ArrayList<>();
-    private Group map,world,monitor,japan,tsunami,quakeInfo;
+    private final List<Circle> kyoshinMonitor = new ArrayList<>();
+    private Group map,world,monitor,monitorText,japan,tsunami,quakeInfo;
     private final String[] configArray = {"darkmode"};
 
     public static void main(String[] args) {
@@ -70,24 +70,27 @@ public class Map extends Application {
         calcFromShapefile("src/main/resources/com/yossy4411/yossyeq/WorldMq/ne_50m_land.shp");
         calcFromShapefile("src/main/resources/com/yossy4411/yossyeq/jp1/地震情報／細分区域.shp");
         calcFromShapefile("src/main/resources/com/yossy4411/yossyeq/jp1/地震情報／都道府県等.shp");
-        System.out.println(ConvertToScaleAtPolynomialInterpolation(Color.ORANGE));
+        System.out.println(ConvertToIntensity(ConvertToScale(Color.valueOf("#aa0000"))));
         calcTsunami();
+
         addPoint("src/main/resources/stations.json","/lat","/lon","/name","/code");
-        map = new Group();
-        world = new Group();
-        japan = new Group();
-        tsunami = new Group();
-        monitor = new Group();
-        quakeInfo = new Group();
-        Group root = new Group();
+        map = new Group();//**以下のものをまとめているグループ**
+        world = new Group();//世界のマップ
+        japan = new Group();//日本のマップ
+        tsunami = new Group();//津波予報
+        monitor = new Group();//強震モニタ
+        quakeInfo = new Group();//地震情報
+        monitorText = new Group();//観測点
+        Group root = new Group();//mapグループの大元
 
         root.getChildren().add(map);
         map.getChildren().add(tsunami);
         map.getChildren().add(world);
         map.getChildren().add(japan);
         map.getChildren().add(monitor);
+        map.getChildren().add(monitorText);
         map.getChildren().add(quakeInfo);
-
+        addKyoshinMonitor();
         Scene scene = new Scene(root, windowWidth, windowHeight);
         addColor();
         zoomMapping();
@@ -97,7 +100,7 @@ public class Map extends Application {
         map.setTranslateY(windowHeight / 2 - home.getY());
         drawTsunami();
         drawPolygons();
-        drawKyoshinMonitor();
+        changeKyoshinMonitor();
         drawQuakeInfo();
 
         translateMapping();
@@ -118,7 +121,7 @@ public class Map extends Application {
                 map.setTranslateX(map.getTranslateX() + deltaX);
                 map.setTranslateY(map.getTranslateY() + deltaY);
                 translateMapping();
-                drawKyoshinMonitor();
+                changeKyoshinMonitor();
 
                 mouseX = event.getX();
                 mouseY = event.getY();
@@ -227,9 +230,11 @@ public class Map extends Application {
                 }
             }
         }
-        geometries = geometryPolygons.get(2);
+        geometries = geometryPolygons.get(2);//日本の緊急地震速報の配列
         Group strokes = new Group();
+        int i = 0;
         for (List<List<Point2D>> geometry : geometries) {//地物を取得
+
             for (List<Point2D> point2DS : geometry) {//シェイプを取得
                 Polyline polygon = new Polyline();
                 Point2D distPoint = new Point2D(1800, 900);
@@ -249,13 +254,17 @@ public class Map extends Application {
                 if (polygon.getPoints().size() > 2 && outCount < polygon.getPoints().size()) {//完全に画面外または線or点になるものを描画しない
                     //ポリゴンのスタイルを設定
                     polygon.setStroke(Color.DIMGRAY);
+                    polygon.setFill(Colors.get(4).get(i));
                     if (Objects.equals(getProperties("darkmode"), "true")) {
                         polygon.setStroke(Color.WHITESMOKE);
                     }
+
                     polygon.setStrokeWidth(zoomFactor2 * Math.sqrt(Math.sqrt(zoomFactor)) / 2);
                     strokes.getChildren().add(polygon);
                 }
+
             }
+            i++;
         }
         japan.getChildren().add(strokes);
     }
@@ -324,7 +333,7 @@ public class Map extends Application {
             point.setFill(color);
             point.setStroke(color.darker());
             point.setStrokeWidth(Math.sqrt(zoomFactor) / 7);
-            Text text = new Text(Names.get(4).get(i));
+            Text text = new Text(Names.get(5).get(i));
             text.setFont((Font.font("Arial", 10)));
             text.setX(position.getX() + Math.sqrt(zoomFactor)/1.2);
             text.setY(position.getY() + Math.sqrt(zoomFactor)/2.4);
@@ -342,14 +351,22 @@ public class Map extends Application {
         }
         quakeInfo.getChildren().add(pointsGroup);
     }
-
-    private void drawKyoshinMonitor() {
+    private void addKyoshinMonitor(){
         monitor.getChildren().clear();
-        Group pointsGroup = new Group();
         List<Point2D> points = Points.get(0);
         for (int i= 0; i < points.size(); i ++) {
-            Point2D point2D = points.get(i);
             Circle point = new Circle();
+            kyoshinMonitor.add(point);
+        }
+        monitor.getChildren().addAll(kyoshinMonitor);
+    }
+
+    private void changeKyoshinMonitor() {
+        monitorText.getChildren().clear();
+        List<Point2D> points = Points.get(0);
+        for (int i= 0; i < points.size(); i ++) {
+            Circle point = kyoshinMonitor.get(i);
+            Point2D point2D = points.get(i);
             Point2D position = convertLatLngToScreen(point2D.getY(), point2D.getX());
             point.setCenterX(position.getX());
             point.setCenterY(position.getY());
@@ -363,13 +380,14 @@ public class Map extends Application {
             point.setRadius(Math.sqrt(zoomFactor)/1.5);
             point.setFill(Colors.get(3).get(i));
             boolean inWindow = Math.abs(point.getCenterX() + map.getTranslateX() - windowWidth / 2) < windowWidth / 2 + point.getRadius()&& Math.abs(point.getCenterY() + map.getTranslateY() - windowHeight / 2) < windowHeight /2+ point.getRadius();
-            if (inWindow && Objects.equals(Names.get(1).get(i), "false")) {monitor.getChildren().add(point);
-                if (zoomFactor > 300){pointsGroup.getChildren().add(text);}}
+            if (inWindow && Names.get(1).get(i).equals("false")/*休止中かどうか*/ ) {
+                if (zoomFactor > 300){monitorText.getChildren().add(text);}}
+            else{point.setFill(null);}
         }
-        monitor.getChildren().add(pointsGroup);
+
     }
     private void calcFromShapefile(String filePath) throws IOException {
-        boolean isJP = 1 == geometryPolygons.size();
+        boolean isJP = 1 == geometryPolygons.size() || 2 == geometryPolygons.size();
         File file = new File(filePath);
         DataStore dataStore = FileDataStoreFinder.getDataStore(file);
         String[] typeNames = dataStore.getTypeNames();
@@ -477,7 +495,7 @@ public class Map extends Application {
         for (int i = 0;i<geometryPolygons.get(3).size(); i++){
             Color color = null;
             String tsunamiArray = "";
-            if (tsunamiArray.contains(Names.get(3).get(i))){color = Color.valueOf("#eb0fff");}
+            if (tsunamiArray.contains(Names.get(4).get(i))){color = Color.valueOf("#eb0fff");}
             colorList.add(color);
         }
         Colors.add(colorList);
@@ -485,7 +503,7 @@ public class Map extends Application {
         for (int i = 0;i<Points.get(1).size(); i++){
             Color color = null;
             String tsunamiArray = "大阪此花区春日出北";
-            if (tsunamiArray.contains(Names.get(4).get(i))){color = Color.valueOf("#32b464");}
+            if (tsunamiArray.contains(Names.get(5).get(i))){color = Color.valueOf("#32b464");}
             colorList.add(color);
         }
         Colors.add(colorList);
@@ -493,8 +511,17 @@ public class Map extends Application {
         for (int i = 0;i<Points.get(0).size(); i++){
             Color color = Color.BLUE;
             String tsunamiArray = "大津";
-            if (tsunamiArray.contains(Names.get(0).get(i))){color = Color.valueOf("#32b464");}
+            if (tsunamiArray.contains(Names.get(0).get(i))){color = Color.valueOf("#ff990f");}
             colorList.add(color);
+        }
+        Colors.add(colorList);
+        colorList = new ArrayList<>();
+        for (int i = 0;i<geometryPolygons.get(2).size(); i++){
+            Color color = null;
+            String tsunamiArray = "滋賀県 大阪府 京都府 兵庫県 三重県 和歌山県 奈良県 愛知県 福井県 香川県 徳島県 岐阜県";
+            if (tsunamiArray.contains(Names.get(3).get(i))){color = Color.RED;}
+            if (color == null) {colorList.add(color);}
+            else{colorList.add(color.deriveColor(0, 1, 1, 0.7));}
         }
         Colors.add(colorList);
     }
@@ -607,7 +634,7 @@ public class Map extends Application {
         world.getChildren().clear();
         drawTsunami();
         drawPolygons();
-        drawKyoshinMonitor();
+        changeKyoshinMonitor();
         drawQuakeInfo();
     }
 

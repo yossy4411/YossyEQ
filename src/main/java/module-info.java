@@ -10,6 +10,9 @@ module com.yossy4411.yossyeq {
     requires org.geotools.opengis;
     requires java.sql;
     requires org.locationtech.jts;
+    requires java.desktop;
+    requires com.opencsv;
+    requires core;
 
 
     opens com.yossy4411.yossyeq to javafx.fxml;
