@@ -11,8 +11,11 @@ module com.yossy4411.yossyeq {
     requires java.sql;
     requires org.locationtech.jts;
     requires java.desktop;
-    requires com.opencsv;
     requires core;
+    requires org.apache.httpcomponents.httpcore;
+    requires org.apache.httpcomponents.httpclient;
+    requires java.net.http;
+    requires org.osgi.service.upnp;
 
 
     opens com.yossy4411.yossyeq to javafx.fxml;

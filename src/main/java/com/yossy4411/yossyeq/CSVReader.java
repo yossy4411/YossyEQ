@@ -29,6 +29,7 @@ public class CSVReader extends Application {
             Polyline redline = new Polyline();
             Polyline greenline = new Polyline();
             Polyline blueline = new Polyline();
+            float i = 0f;
             while ((line = br.readLine()) != null) {
                 String[] values = line.split(delimiter);
                 double firstColumnValue = Double.parseDouble(values[0]);
@@ -38,12 +39,19 @@ public class CSVReader extends Application {
                 Circle point = new Circle();
 
                 point.setRadius(5);
-                point.setFill(Color.rgb(red,green,blue));
+                Color fill = (colorConverter.convertToColor(i));
+                point.setFill(fill);
+
                 point.setCenterX((firstColumnValue + 3 )* 40);
                 point.setCenterY(250);
-                redline.getPoints().addAll((firstColumnValue + 3 )* 40, 270 - (double) red);
-                greenline.getPoints().addAll((firstColumnValue + 3 )* 40, 270-(double) green);
-                blueline.getPoints().addAll((firstColumnValue + 3 )* 40, 270-(double) blue);
+                redline.getPoints().addAll((firstColumnValue + 3 )* 40, 270 - fill.getHue());
+                greenline.getPoints().addAll((firstColumnValue + 3 )* 40, 270-fill.getSaturation());
+                blueline.getPoints().addAll((firstColumnValue + 3 )* 40, 270- fill.getBrightness());
+                fill = Color.rgb(red,green,blue);
+                redline.getPoints().addAll((firstColumnValue + 3 )* 40, 270 - fill.getHue());
+                greenline.getPoints().addAll((firstColumnValue + 3 )* 40, 270-fill.getSaturation());
+                blueline.getPoints().addAll((firstColumnValue + 3 )* 40, 270- fill.getBrightness());
+                i += 0.01;
                 root.getChildren().add(point);
             }
             redline.setStroke(Color.RED);
@@ -52,6 +60,7 @@ public class CSVReader extends Application {
             root.getChildren().add(redline);
             root.getChildren().add(greenline);
             root.getChildren().add(blueline);
+
         } catch (IOException e) {
             e.printStackTrace();
         }

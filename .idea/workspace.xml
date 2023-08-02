@@ -4,24 +4,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e62cc188-2d27-4f74-9ead-fb7d1460565e" name="変更" comment="地域震度観測情報の表示を追加、パフォーマンス改善（マップ簡略化を含む）">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/CSVReader.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/test/CSVReaderExample.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/test/ColorEditor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/ShindoColor.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+    <list default="true" id="e62cc188-2d27-4f74-9ead-fb7d1460565e" name="変更" comment="P2P地震情報へピアとして接続するためのコードを追加。">
+      <change afterPath="$PROJECT_DIR$/UPnP.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/test/KyoshinMonitor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/test/TCPClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/test/WriteListToFileExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/test/test.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/test/testData.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/test/testKyoshinData.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/jp1/地震情報／細分区域.cpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/jp1/地震情報／細分区域.qmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/jp1/地震情報／都道府県等.cpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/jp1/地震情報／都道府県等.qmd" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/CSVReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/CSVReader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/Map.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/colorConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/colorConverter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/test/RoundedLineExample.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/test/CSVReaderExample.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/test/ColorEditor.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/jp1/地震情報／細分区域.cpg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/jp1/地震情報／細分区域.dbf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/jp1/地震情報／細分区域.dbf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/jp1/地震情報／細分区域.prj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/jp1/地震情報／細分区域.qmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/jp1/地震情報／細分区域.shp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/jp1/地震情報／細分区域.shp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/jp1/地震情報／細分区域.shx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/jp1/地震情報／細分区域.shx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/jp1/地震情報／都道府県等.dbf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/jp1/地震情報／都道府県等.dbf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/jp1/地震情報／都道府県等.shp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/jp1/地震情報／都道府県等.shp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/jp1/地震情報／都道府県等.shx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/jp1/地震情報／都道府県等.shx" afterDir="false" />
@@ -34,6 +37,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="JavaFXApplication" />
         <option value="Class" />
       </list>
     </option>
@@ -46,6 +50,9 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="UPDATE_TYPE" value="REBASE" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/main/resources/kyoshinMonitorPlaces.json" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -62,20 +69,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/yaido/IdeaProjects/YossyEQ/src/main/resources/com/yossy4411/yossyeq/jp1",
-    "project.structure.last.edited": "プロジェクト",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "preferences.fileTypes",
-    "two.files.diff.last.used.file": "C:/Users/yaido/IdeaProjects/YossyEQ/src/main/java/com/yossy4411/yossyeq/test/Rectangle.java"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/yaido/IdeaProjects/YossyEQ/src/main/resources/com/yossy4411/yossyeq/jp1&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;プロジェクト&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;,
+    &quot;two.files.diff.last.used.file&quot;: &quot;C:/Users/yaido/IdeaProjects/YossyEQ/src/main/java/com/yossy4411/yossyeq/test/Rectangle.java&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\yaido\IdeaProjects\YossyEQ\src\main\resources\com\yossy4411\yossyeq\jp1" />
@@ -191,7 +198,15 @@
       <option name="project" value="LOCAL" />
       <updated>1690377463734</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="緊急地震速報の表示機能を追加。">
+      <option name="closed" value="true" />
+      <created>1690605187081</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1690605187081</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -228,7 +243,9 @@
     <MESSAGE value="津波表示システム、設定ファイル、地域色塗りの追加" />
     <MESSAGE value="地域震度観測情報の表示を追加、パフォーマンス改善（マップ簡略化&#10;を含む）" />
     <MESSAGE value="地域震度観測情報の表示を追加、パフォーマンス改善（マップ簡略化を含む）" />
-    <option name="LAST_COMMIT_MESSAGE" value="地域震度観測情報の表示を追加、パフォーマンス改善（マップ簡略化を含む）" />
+    <MESSAGE value="緊急地震速報の表示機能を追加。" />
+    <MESSAGE value="P2P地震情報へピアとして接続するためのコードを追加。" />
+    <option name="LAST_COMMIT_MESSAGE" value="P2P地震情報へピアとして接続するためのコードを追加。" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -18,6 +18,10 @@
             <id>OSGeo</id>
             <url>https://repo.osgeo.org/repository/release/</url>
         </repository>
+        <repository>
+            <id>Nuiton</id>
+            <url>https://maven.nuiton.org/release/</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -85,9 +89,19 @@
             <version>5.8</version>
         </dependency>
         <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>org.osgi.service.upnp</artifactId>
+            <version>1.2.1</version>
+        </dependency>
+        <dependency>
             <groupId>org.processing</groupId>
             <artifactId>core</artifactId>
             <version>3.3.7</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.14</version>
         </dependency>
     </dependencies>
 

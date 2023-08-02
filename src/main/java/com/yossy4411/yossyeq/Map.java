@@ -37,11 +37,12 @@ import java.util.*;
 import static com.yossy4411.yossyeq.colorConverter.*;
 
 public class Map extends Application {
+
     private double windowWidth,windowHeight;
     private double mouseX;
     private double mouseY;
-    private final int mapSizeX = 1000;//※マップの本来の比率は3:4です
-    private final int mapSizeY = 800;
+    private final int mapSizeX = 800;//※マップの本来の比率は8:7です
+    private final int mapSizeY = 700;
     private double zoomFactor = 1.0;
     private final float roughness = 1f;
     private double zoomFactor2;
@@ -53,6 +54,7 @@ public class Map extends Application {
     private final List<List<String>> Names = new ArrayList<>();
     private final List<List<Color>> Colors = new ArrayList<>();
     private final List<Circle> kyoshinMonitor = new ArrayList<>();
+    private final List<Point2D> kyoshinImages = new ArrayList<>();
     private Group map,world,monitor,monitorText,japan,tsunami,quakeInfo;
     private final String[] configArray = {"darkmode"};
 
@@ -65,15 +67,15 @@ public class Map extends Application {
         windowWidth = 800; // ウィンドウ横幅
         windowHeight = 600; // ウィンドウ縦幅
         readProperties();
-        addPoint("src/main/resources/kyoshinMonitorPlaces.json","/Location/Latitude","/Location/Longitude","/Name","/IsSuspended");
+        addPoint("src/main/resources/kyoshinMonitorPlaces.json","/Location/Latitude","/Location/Longitude","/Name", new String[]{"/IsSuspended","Point/X","Point/Y"});
 
         calcFromShapefile("src/main/resources/com/yossy4411/yossyeq/WorldMq/ne_50m_land.shp");
         calcFromShapefile("src/main/resources/com/yossy4411/yossyeq/jp1/地震情報／細分区域.shp");
         calcFromShapefile("src/main/resources/com/yossy4411/yossyeq/jp1/地震情報／都道府県等.shp");
-        System.out.println(ConvertToIntensity(ConvertToScale(Color.valueOf("#aa0000"))));
+        System.out.println((double)Math.round(ConvertToIntensity(ConvertToScale(Color.valueOf("#001cdf"))) *10)/10);
         calcTsunami();
 
-        addPoint("src/main/resources/stations.json","/lat","/lon","/name","/code");
+        addPoint("src/main/resources/stations.json","/lat","/lon","/name",new String[]{"/code"});
         map = new Group();//**以下のものをまとめているグループ**
         world = new Group();//世界のマップ
         japan = new Group();//日本のマップ
@@ -253,13 +255,21 @@ public class Map extends Application {
                 }
                 if (polygon.getPoints().size() > 2 && outCount < polygon.getPoints().size()) {//完全に画面外または線or点になるものを描画しない
                     //ポリゴンのスタイルを設定
-                    polygon.setStroke(Color.DIMGRAY);
-                    polygon.setFill(Colors.get(4).get(i));
-                    if (Objects.equals(getProperties("darkmode"), "true")) {
-                        polygon.setStroke(Color.WHITESMOKE);
+
+                    polygon.setStroke(Colors.get(4).get(i));
+                    polygon.setStrokeWidth(zoomFactor2 * Math.sqrt(Math.sqrt(zoomFactor))*1.3);
+                    polygon.setStrokeLineJoin(javafx.scene.shape.StrokeLineJoin.ROUND);
+
+                    if (Colors.get(4).get(i)==null){
+                        polygon.setStroke(Color.DIMGRAY);
+                        if (Objects.equals(getProperties("darkmode"), "true")) {
+                            polygon.setStroke(Color.WHITESMOKE);
+                        }
+                        polygon.setStrokeWidth(zoomFactor2 * Math.sqrt(Math.sqrt(zoomFactor)) / 2);
                     }
 
-                    polygon.setStrokeWidth(zoomFactor2 * Math.sqrt(Math.sqrt(zoomFactor)) / 2);
+
+
                     strokes.getChildren().add(polygon);
                 }
 
@@ -511,7 +521,7 @@ public class Map extends Application {
         for (int i = 0;i<Points.get(0).size(); i++){
             Color color = Color.BLUE;
             String tsunamiArray = "大津";
-            if (tsunamiArray.contains(Names.get(0).get(i))){color = Color.valueOf("#ff990f");}
+            if (tsunamiArray.contains(Names.get(0).get(i))){color = com.yossy4411.yossyeq.colorConverter.convertToColor(0.3);}
             colorList.add(color);
         }
         Colors.add(colorList);
@@ -525,7 +535,17 @@ public class Map extends Application {
         }
         Colors.add(colorList);
     }
-    private void addPoint (String filePath,String latitudePath,String longitudePath,String namePath,String otherPath) {
+    private void setKyoshinColor(){
+        List<Color> colorList = new ArrayList<>();
+        for (int i = 0;i<Points.get(0).size(); i++){
+            Color color = Color.BLUE;
+            String tsunamiArray = "大津";
+            if (tsunamiArray.contains(Names.get(0).get(i))){color = com.yossy4411.yossyeq.colorConverter.convertToColor(0.3);}
+            colorList.add(color);
+        }
+        Colors.set(3,colorList);
+    }
+    private void addPoint (String filePath,String latitudePath,String longitudePath,String namePath,String[] otherPath) {
         // ファイルからJSON文字列を読み取る
         String jsonString;
         try {
@@ -549,10 +569,15 @@ public class Map extends Application {
         int index = Names.size() - 1;
         Points.add(new ArrayList<>());
         int index2 = Points.size() - 1;
-        for (int i = 0;i<jsonNode.size();i++){
-        Points.get(index2).add(new Point2D(jsonNode.at("/"+i+longitudePath).asDouble(),jsonNode.at("/"+i+latitudePath).asDouble()));
-        Names.get(index - 1).add(jsonNode.at("/" + i + namePath).asText());
-            Names.get(index).add(jsonNode.at("/" + i + otherPath).asText());
+        for (int i = 0;i<jsonNode.size();i++) {
+            if(!Objects.equals(jsonNode.at("/" + i + "/Point").asText(), "null")) {
+                Points.get(index2).add(new Point2D(jsonNode.at("/" + i + longitudePath).asDouble(), jsonNode.at("/" + i + latitudePath).asDouble()));
+                Names.get(index - 1).add(jsonNode.at("/" + i + namePath).asText());
+                Names.get(index).add(jsonNode.at("/" + i + otherPath[0]).asText());
+                if (otherPath.length > 1) {
+                    kyoshinImages.add(new Point2D(jsonNode.at("/" + i + otherPath[1]).asDouble(), jsonNode.at("/" + i + otherPath[2]).asDouble()));
+                }
+            }
         }
     }
 
