@@ -1,7 +1,6 @@
 module com.yossy.yossyeq {
     requires javafx.controls;
     requires javafx.fxml;
-    requires json.path;
     requires com.fasterxml.jackson.databind;
     requires org.slf4j;
     requires org.geotools.main;
