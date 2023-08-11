@@ -1,4 +1,4 @@
-package com.yossy4411.yossyeq.test;
+package com.yossy4411.yossyeq;
 
 import java.io.*;
 import java.net.Socket;
@@ -11,9 +11,9 @@ import java.util.concurrent.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class TCPClient {
+public class P2PQuake {
     private static int peerId = -1;
-    private static final Logger LOGGER = Logger.getLogger(TCPClient.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(P2PQuake.class.getName());
     private static final List<Integer> ConnectedPeers = new ArrayList<>();
     private static List<String> Keys = new ArrayList<>();
     private static LocalDateTime KeyEffective = LocalDateTime.now();
@@ -23,7 +23,7 @@ public class TCPClient {
     public static void main(String[] args) throws IOException {
         LOGGER.setLevel(Level.INFO);
         connectToServer();
-        scheduler.scheduleAtFixedRate(TCPClient::serverEcho, 0, 10, TimeUnit.MINUTES);
+        scheduler.scheduleAtFixedRate(P2PQuake::serverEcho, 10, 10, TimeUnit.MINUTES);
     }
     private static void serverEcho() {
         if (i > 0) {
@@ -51,7 +51,7 @@ public class TCPClient {
                             String[] peers = parts[2].split(":");
                             for (String peer : peers) {
                                 String[] peerData = peer.split(",");
-                                CompletableFuture<Void> future = CompletableFuture.runAsync(() -> {
+                                CompletableFuture.runAsync(() -> {
                                     connectToPeer(peerData[0], Integer.parseInt(peerData[1]), Integer.parseInt(peerData[2])); // 任意のアドレスとポートを指定
                                 });
                             }
@@ -84,7 +84,7 @@ public class TCPClient {
                             Keys.add(parts[2].split(":")[2]);
                             Keys.add(parts[2].split(":")[3]);
                             KeyEffective = LocalDateTime.parse(parts[2].split(":")[1], DateTimeFormatter.ofPattern("yyyy/MM/dd HH-mm-ss"));
-                            saveKey();
+                            saveKey(Keys,KeyEffective);
                         } catch (ArrayIndexOutOfBoundsException ignore) {
                             readKey();
                         }
@@ -99,6 +99,7 @@ public class TCPClient {
 
     }
     private static void connectToPeer(String address, int port, int peerID) {
+        LocalDateTime receivedTime = LocalDateTime.now();
         try (Socket socket = new Socket(address, port);
 
              OutputStream outputStream = socket.getOutputStream();
@@ -106,44 +107,30 @@ public class TCPClient {
              InputStream inputStream = socket.getInputStream();
              BufferedReader in = new BufferedReader(new InputStreamReader(inputStream, Charset.forName("SHIFT-JIS")))) {
             int n= 0;
-            final int[] ps = {0};
             // ピアからの応答を受信
 
             String response;
             while ((response = in.readLine()) != null) {
+
                 System.out.println(response + "をピアから受信しました。(" + peerID + ")");
+
                 if (n == 0) {
                     ConnectedPeers.add(peerID);
-                    CompletableFuture<Void> future = CompletableFuture.runAsync(() -> {
+                    CompletableFuture.runAsync(() -> {
                         try {
                             relay(peerID, out);
                         } catch (IOException e) {
                             throw new RuntimeException(e);
                         }
                     });
-                    scheduler.scheduleAtFixedRate(() -> {
-                        if(ps[0] == 0){
-                            ps[0]++;}else{
-                        out.println("611 1");
-                        long time = System.currentTimeMillis();
-                        System.out.println("定期的なピアエコーを実施します。（自動）");
-                        while (true) {
-                            try {
-                                if (in.readLine() == null && System.currentTimeMillis() - time > 2000) {
-                                    future.cancel(true);
-                                    socket.close();
-                                    ConnectedPeers.remove((Integer) peerID);
-                                    System.out.println("ピアとの接続が確認できなかったため、"+peerID+"への接続を切断しました。");
-                                    break;
-                                }
-                            } catch (IOException e) {
-                                throw new RuntimeException(e);
-                            }
-                        }
-                        }
-                    }, 0, 10, TimeUnit.MINUTES);
                     n = 1;
                 }
+                if(receivedTime.plus(20, ChronoUnit.MINUTES).isBefore(LocalDateTime.now())){
+                    socket.close();
+                    ConnectedPeers.remove((Integer) peerID);
+                    System.out.println("ピアとの接続が確認できなかったため、" + peerID + "への接続を切断しました。");
+                }
+                receivedTime = LocalDateTime.now();
                 int code = Integer.parseInt(response.split(" ")[0]);
                 if (code == 614) {
                     out.println("634 1 0.32:YossyEQ:Beta");
@@ -173,7 +160,8 @@ public class TCPClient {
         ExecutorService executor = Executors.newSingleThreadExecutor();
         executor.submit(() -> {
             System.out.println("ピアへの送信の準備が完了しました。");
-            while (true) {
+            boolean error = false;
+            while (!error) {
                 try {
                     if (!sendData.isEmpty()) {
                         if (!buffers.contains(sendData.get(2))) {
@@ -188,6 +176,7 @@ public class TCPClient {
                     Thread.sleep(10); // 適宜適切な待ち時間を設定する
                 } catch (Exception e) {
                     System.err.println("エラーが発生しました：" + e.getMessage());
+                    error = true;
                 }
             }
         });
@@ -253,7 +242,7 @@ public class TCPClient {
                         String[] peers = parts[2].split(":");
                         for (String peer : peers) {
                             String[] peerData = peer.split(",");
-                            CompletableFuture<Void> future = CompletableFuture.runAsync(() -> {
+                            CompletableFuture.runAsync(() -> {
                                 connectToPeer(peerData[0], Integer.parseInt(peerData[1]), Integer.parseInt(peerData[2])); // 任意のアドレスとポートを指定
                             });
                         }
@@ -278,14 +267,16 @@ public class TCPClient {
                         out.println("117 1 " + peerId);
                         progress = 6;
                     }else if (progress == 6){
-                        if(code == 295){readKey();}else{
+                        if(code == 237){
+                            String[] key =parts[2].split(":");
                             Keys.clear();
-                            Keys.add(parts[2].split(":")[0]);
-                            Keys.add(parts[2].split(":")[1]);
-                            Keys.add(parts[2].split(":")[3]);
-                            KeyEffective = LocalDateTime.parse(parts[2].split(":")[1], DateTimeFormatter.ofPattern("yyyy/MM/dd HH-mm-ss"));
-                            saveKey();
-                        }
+                            Keys.add(key[0]);
+                            Keys.add(key[1]);
+                            key =parts[3].split(":");
+                            Keys.add(key[1]);
+                            KeyEffective = LocalDateTime.parse(parts[2].split(":")[2] +" "+ key[0], DateTimeFormatter.ofPattern("yyyy/MM/dd HH-mm-ss"));
+                            saveKey(Keys,KeyEffective);
+                        }else{readKey();System.out.println("鍵は既に割り当て済みのようです。");}
 
                         progress = 7;
                         out.println("127 1");
@@ -305,14 +296,14 @@ public class TCPClient {
             System.err.println("エラーが発生しました: " + e.getMessage());
         }
     }
-    private static void saveKey(){
+    private static void saveKey(List<String> Data, LocalDateTime time){
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/resources/com/yossy4411/yossyeq/keys.txt"))) {
-            for (String data : Keys) {
+            for (String data : Data) {
                 writer.write(data);
                 writer.newLine(); // 改行でデータを区切る
             }
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH-mm-ss");
-            writer.write(KeyEffective.format(formatter));
+            writer.write(time.format(formatter));
             System.out.println("データをファイルに書き込みました。");
         } catch (IOException e) {
             System.err.println("ファイルの書き込みエラー: " + e.getMessage());

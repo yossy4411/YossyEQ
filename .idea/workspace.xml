@@ -4,11 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e62cc188-2d27-4f74-9ead-fb7d1460565e" name="変更" comment="P2P地震情報へピアとして接続するためのコードを追加。" />
+    <list default="true" id="e62cc188-2d27-4f74-9ead-fb7d1460565e" name="変更" comment="強震モニタ、地震情報の表示システムの追加。">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/GetQuake.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/GetQuake.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/Map.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/P2PQuake.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/P2PQuake.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/colorConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/colorConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/test/ImageColorPicker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/test/ImageColorPicker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/test/ListSortIndexExample.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/test/ListSortIndexExample.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -45,19 +56,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/yaido/IdeaProjects/YossyEQ/src/main/resources/com/yossy4411/yossyeq/jp1",
-    "project.structure.last.edited": "プロジェクト",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
-    "two.files.diff.last.used.file": "C:/Users/yaido/IdeaProjects/YossyEQ/src/main/java/com/yossy4411/yossyeq/test/Rectangle.java"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/yaido/IdeaProjects/YossyEQ/src/main/resources/com/yossy4411/yossyeq/jp1&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;プロジェクト&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;,
+    &quot;two.files.diff.last.used.file&quot;: &quot;C:/Users/yaido/IdeaProjects/YossyEQ/src/main/java/com/yossy4411/yossyeq/test/Rectangle.java&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\yaido\IdeaProjects\YossyEQ\src\main\resources\com\yossy4411\yossyeq\jp1" />
@@ -189,7 +200,39 @@
       <option name="project" value="LOCAL" />
       <updated>1690961565368</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="P2P地震情報へピアとして接続するためのコードを追加。">
+      <option name="closed" value="true" />
+      <created>1690965747255</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1690965747255</updated>
+    </task>
+    <task id="LOCAL-00012" summary="P2P地震情報へピアとして接続するためのコードを追加。">
+      <option name="closed" value="true" />
+      <created>1690965766994</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1690965766994</updated>
+    </task>
+    <task id="LOCAL-00013" summary="P2P地震情報へピアとして接続するためのコードを追加。">
+      <option name="closed" value="true" />
+      <created>1690966064627</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1690966064627</updated>
+    </task>
+    <task id="LOCAL-00014" summary="強震モニタ、地震情報の表示システムの追加。">
+      <option name="closed" value="true" />
+      <created>1691729361764</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1691729361765</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -227,8 +270,10 @@
     <MESSAGE value="地域震度観測情報の表示を追加、パフォーマンス改善（マップ簡略化&#10;を含む）" />
     <MESSAGE value="地域震度観測情報の表示を追加、パフォーマンス改善（マップ簡略化を含む）" />
     <MESSAGE value="緊急地震速報の表示機能を追加。" />
+    <MESSAGE value="P2P地震情報へピアとして接続するためのプログラムを追加。" />
     <MESSAGE value="P2P地震情報へピアとして接続するためのコードを追加。" />
-    <option name="LAST_COMMIT_MESSAGE" value="P2P地震情報へピアとして接続するためのコードを追加。" />
+    <MESSAGE value="強震モニタ、地震情報の表示システムの追加。" />
+    <option name="LAST_COMMIT_MESSAGE" value="強震モニタ、地震情報の表示システムの追加。" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -1,4 +1,4 @@
-module com.yossy4411.yossyeq {
+module com.yossy.yossyeq {
     requires javafx.controls;
     requires javafx.fxml;
     requires json.path;
@@ -12,10 +12,9 @@ module com.yossy4411.yossyeq {
     requires org.locationtech.jts;
     requires java.desktop;
     requires core;
-    requires org.apache.httpcomponents.httpcore;
-    requires org.apache.httpcomponents.httpclient;
     requires java.net.http;
     requires org.osgi.service.upnp;
+    requires org.apache.commons.net;
 
 
     opens com.yossy4411.yossyeq to javafx.fxml;
