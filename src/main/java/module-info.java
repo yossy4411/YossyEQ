@@ -3,17 +3,13 @@ module com.yossy.yossyeq {
     requires javafx.fxml;
     requires json.path;
     requires com.fasterxml.jackson.databind;
-    requires org.json;
-    requires json.smart;
     requires org.slf4j;
     requires org.geotools.main;
     requires org.geotools.opengis;
     requires java.sql;
     requires org.locationtech.jts;
     requires java.desktop;
-    requires core;
     requires java.net.http;
-    requires org.osgi.service.upnp;
     requires org.apache.commons.net;
 
 
