@@ -4,14 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e62cc188-2d27-4f74-9ead-fb7d1460565e" name="変更" comment="強震モニタ、地震情報の表示システムの追加。">
+    <list default="true" id="e62cc188-2d27-4f74-9ead-fb7d1460565e" name="変更" comment="Githubでビルドするために、依存関係を修正">
+      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/yaido.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/GetQuake.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/GetQuake.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/Map.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/P2PQuake.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/P2PQuake.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/colorConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/colorConverter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/test/ImageColorPicker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/test/ImageColorPicker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/test/ListSortIndexExample.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/test/ListSortIndexExample.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,9 +42,6 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="MavenRunner">
-    <option name="jreName" value="17 (2)" />
-  </component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
@@ -56,19 +51,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/yaido/IdeaProjects/YossyEQ/src/main/resources/com/yossy4411/yossyeq/jp1&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;プロジェクト&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;,
-    &quot;two.files.diff.last.used.file&quot;: &quot;C:/Users/yaido/IdeaProjects/YossyEQ/src/main/java/com/yossy4411/yossyeq/test/Rectangle.java&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/yaido/IdeaProjects/YossyEQ/src/main/resources/com/yossy4411/yossyeq/jp1",
+    "project.structure.last.edited": "プロジェクト",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.runner",
+    "two.files.diff.last.used.file": "C:/Users/yaido/IdeaProjects/YossyEQ/src/main/java/com/yossy4411/yossyeq/test/Rectangle.java"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\yaido\IdeaProjects\YossyEQ\src\main\resources\com\yossy4411\yossyeq\jp1" />
@@ -232,7 +228,63 @@
       <option name="project" value="LOCAL" />
       <updated>1691729361765</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="強震モニタ、地震情報の表示システムの追加。">
+      <option name="closed" value="true" />
+      <created>1691733259435</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1691733259435</updated>
+    </task>
+    <task id="LOCAL-00016" summary="強震モニタ、地震情報の表示システムの追加。">
+      <option name="closed" value="true" />
+      <created>1691734093657</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1691734093657</updated>
+    </task>
+    <task id="LOCAL-00017" summary="maven.ymlの修正">
+      <option name="closed" value="true" />
+      <created>1691742698398</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1691742698398</updated>
+    </task>
+    <task id="LOCAL-00018" summary="maven.ymlの修正">
+      <option name="closed" value="true" />
+      <created>1691743787640</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1691743787640</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Githubでビルドするために、依存関係を修正">
+      <option name="closed" value="true" />
+      <created>1691744987147</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1691744987147</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Githubでビルドするために、依存関係を修正">
+      <option name="closed" value="true" />
+      <created>1691755664776</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1691755664776</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Githubでビルドするために、依存関係を修正">
+      <option name="closed" value="true" />
+      <created>1691758983905</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1691758983905</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -273,7 +325,10 @@
     <MESSAGE value="P2P地震情報へピアとして接続するためのプログラムを追加。" />
     <MESSAGE value="P2P地震情報へピアとして接続するためのコードを追加。" />
     <MESSAGE value="強震モニタ、地震情報の表示システムの追加。" />
-    <option name="LAST_COMMIT_MESSAGE" value="強震モニタ、地震情報の表示システムの追加。" />
+    <MESSAGE value="依存関係が多すぎる問題の修正" />
+    <MESSAGE value="maven.ymlの修正" />
+    <MESSAGE value="Githubでビルドするために、依存関係を修正" />
+    <option name="LAST_COMMIT_MESSAGE" value="Githubでビルドするために、依存関係を修正" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
