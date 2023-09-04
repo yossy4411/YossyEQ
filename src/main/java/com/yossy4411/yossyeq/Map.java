@@ -10,6 +10,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.ScrollEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Polygon;
@@ -49,7 +50,7 @@ public class Map extends Application {
     private double mouseX;
     private double mouseY;
     private final int mapSizeX = 800;//※マップの本来の比率は8:7です
-    private final int mapSizeY = 700;
+    private final int mapSizeY = 750;
     private double zoomFactor = 1.0;
     private final float roughness = 1f;
     private double zoomFactor2;
@@ -63,7 +64,8 @@ public class Map extends Application {
     private final List<Circle> kyoshinMonitor = new ArrayList<>();
     private final List<List<Double>> Scales = new ArrayList<>();
     private final List<Point2D> kyoshinImages = new ArrayList<>();
-    private Group map, world, monitor, monitorText, japan, tsunami, quakeInfo;
+    private Pane map = new Pane();
+    private Group world, monitor, monitorText, japan, tsunami, quakeInfo;
     private final String[] configArray = {"darkmode"};
     private final long Timedelay = getLatestTime() - System.currentTimeMillis();
 
@@ -71,8 +73,8 @@ public class Map extends Application {
         launch(args);
     }
 
-    public void start(Stage stage) throws IOException {
-
+    public void start(Stage stage) throws IOException, InterruptedException {
+        Thread.sleep(1000-(1200+ System.currentTimeMillis())%1000);
         windowWidth = 800; // ウィンドウ横幅
         windowHeight = 600; // ウィンドウ縦幅
         readProperties();
@@ -91,13 +93,13 @@ public class Map extends Application {
         addPoint("src/main/resources/stations.json", "/lat", "/lon", "/name", new String[]{"/code"});
         //**//ここまでは順番を変えるとバグります。
 
-        map = new Group();//以下のものをまとめているグループ
         world = new Group();//世界のマップ
         japan = new Group();//日本のマップ
         tsunami = new Group();//津波予報
         monitor = new Group();//強震モニタ
         quakeInfo = new Group();//地震情報
         monitorText = new Group();//観測点
+
         Group root = new Group();//ルートグループ
 
         root.getChildren().add(map);
@@ -110,7 +112,6 @@ public class Map extends Application {
         addKyoshinMonitor();
         Scene scene = new Scene(root, windowWidth, windowHeight);
         addColor();
-
         zoomMapping();
         zoomFactor = 9.5;
         Point2D home = convertLatLngToScreen(35.5, -135);
@@ -412,12 +413,10 @@ public class Map extends Application {
             kyoshinMonitor.add(new Circle());
         }
         monitor.getChildren().addAll(kyoshinMonitor);
-
     }
-
     private void changeKyoshinMonitor() {
         monitorText.getChildren().clear();
-        System.out.println(Names.get(0).get((int)Math.floor(Scales.get(1).get(Scales.get(1).size() - 1))));
+        //System.out.println(Names.get(0).get((int)Math.floor(Scales.get(1).get(Scales.get(1).size() - 1))));
         monitor.getChildren().clear();
         List<Point2D> points = Points.get(0);
         for (int i = 0; i < Scales.get(1).size(); i++) {
@@ -545,8 +544,28 @@ public class Map extends Application {
         }
         geometryPolygons.add(output);
     }
+    private void EEW(){
+        List<Color> colorList = new ArrayList<>();
+        for (int i = 0; i < geometryPolygons.get(1).size(); i++) {
+            Color color = Color.grayRgb(200);
+            if (Objects.equals(getProperties("darkmode"), "true")) {
+                color = Color.valueOf("#404040FF");
 
-
+            }
+            if (Objects.equals(Names.get(2).get(i), "滋賀県南部")) {
+                color = Color.valueOf("#32b464");
+            }
+            if (Objects.equals(Names.get(2).get(i), "滋賀県北部")) {
+                color = Color.valueOf("#e1e05d");
+            }
+            colorList.add(color);
+            Polygon p = (Polygon) japan.getChildren().get(i);
+            p.setFill(color);
+            japan.getChildren().set(i, p);
+        }
+        Colors.set(0, colorList);
+        drawJapanPolygons();
+    }
     private void addColor() {
         Colors.clear();
         List<Color> colorList = new ArrayList<>();
@@ -554,12 +573,6 @@ public class Map extends Application {
             Color color = Color.grayRgb(200);
             if (Objects.equals(getProperties("darkmode"), "true")) {
                 color = Color.valueOf("#404040FF");
-            }
-            if (Objects.equals(Names.get(2).get(i), "滋賀県南部")) {
-                color = Color.valueOf("#32b464");
-            }
-            if (Objects.equals(Names.get(2).get(i), "滋賀県北部")) {
-                color = Color.valueOf("#e1e05d");
             }
             colorList.add(color);
         }
@@ -605,7 +618,7 @@ public class Map extends Application {
             }
         }
         Colors.add(colorList);
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 4; i++) {
             List<Double> object = new ArrayList<>();
             for (Point2D ignored : kyoshinImages) {
                 object.add(0d);
@@ -615,22 +628,29 @@ public class Map extends Application {
     }
 
     private void setKyoshinColor() {
-        BufferedImage kMoni = getKyoshinMonitor(-Timedelay + 2000);
+        BufferedImage kMoni = getKyoshinMonitor(-Timedelay);
         BufferedImage eew = getPredict(0);
         List<Double> intensity = new ArrayList<>();
+        List<Double> realIntensity = new ArrayList<>();
         List<Double> preEEW = new ArrayList<>();
         for (int i = 0; i < kyoshinImages.size(); i++) {
             Point2D point = kyoshinImages.get(i);
             double obj = ConvertColorToScale(pickColor(Objects.requireNonNull(kMoni), (int) point.getX(), (int) point.getY()));
+            double noneCount;
             preEEW.add(ConvertColorToScale(pickColor(Objects.requireNonNull(eew), (int) point.getX(), (int) point.getY())));
-            if (obj == -1 && Scales.get(0).get(i) != null) {
-                obj = Scales.get(0).get(i);
-            }
+            if (obj == -1) {
+                noneCount = Scales.get(2).get(i) + 1;
+                if (noneCount < 3) {
+                    obj = Scales.get(0).get(i);
+                }
+            }else{noneCount = 0;}
             intensity.add(obj);
+            realIntensity.add(noneCount);
         }
         Scales.set(0, intensity);
         Scales.set(1, utils.sortedIndex(intensity));
-        Scales.set(2, preEEW);
+        Scales.set(2, realIntensity);
+        Scales.set(3, preEEW);
     }
 
     private void addPoint(String filePath, String latitudePath, String longitudePath, String namePath, String[] otherPath) {
@@ -697,7 +717,6 @@ public class Map extends Application {
         }
 
         Point2D coordinate = new Point2D(event.getX() - windowWidth / 2, event.getY() - windowHeight / 2);
-
         // カメラの移動量を計算
         double cameraTranslateX, cameraTranslateY;
         if (scrollDeltaY > 0) {
@@ -713,6 +732,7 @@ public class Map extends Application {
         translateMapping();
 
         redrawPolygons();
+        EEW();
     }
 
     private void translateMapping() {

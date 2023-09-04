@@ -2,10 +2,12 @@ package com.yossy4411.yossyeq;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 import org.apache.commons.net.ntp.NTPUDPClient;
 import org.apache.commons.net.ntp.TimeInfo;
 
+import javax.imageio.IIOException;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -71,16 +73,18 @@ public class GetQuake {
     }
     public static BufferedImage getKyoshinMonitor(long offsetMilli) {
         //引数"timestamp"には、巻き戻す時間をミリ秒形式で指定してください
-        LocalDateTime now = LocalDateTime.now().minus(offsetMilli, ChronoUnit.MILLIS);
+        LocalDateTime now = LocalDateTime.now().minus(offsetMilli+1200, ChronoUnit.MILLIS);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
         String formattedTime = now.format(formatter);
         formatter =  DateTimeFormatter.ofPattern("yyyyMMdd");
         String formattedDate = now.format(formatter);
         try {
             return ImageIO.read(URI.create("http://www.kmoni.bosai.go.jp/data/map_img/RealTimeImg/jma_s/"+formattedDate+"/"+formattedTime+".jma_s.gif").toURL());
-        } catch (IOException e) {
+        } catch (IIOException e) {
             e.printStackTrace();
             return null;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
     public static BufferedImage getPredict(long offsetMilli) {
@@ -92,9 +96,11 @@ public class GetQuake {
         String formattedDate = now.format(formatter);
         try {
             return ImageIO.read(URI.create("https://smi.lmoniexp.bosai.go.jp/data/map_img/EstShindoImg/eew/20230809/20230809125025.eew.gif").toURL());
-        } catch (IOException e) {
+        } catch (IIOException e) {
             e.printStackTrace();
             return null;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
     public static BufferedImage getPGA(long offsetMilli) {
@@ -106,9 +112,11 @@ public class GetQuake {
         String formattedDate = now.format(formatter);
         try {
             return ImageIO.read(URI.create("https://smi.lmoniexp.bosai.go.jp/data/map_img/RealTimeImg/acmap_s/"+formattedDate+"/"+formattedTime+".acmap_s.gif").toURL());
-        } catch (IOException e) {
+        } catch (IIOException e) {
             e.printStackTrace();
             return null;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
     public static long getLatestTime(){
@@ -163,6 +171,18 @@ public class GetQuake {
                 this.value = value;
             }
         }
+        public static Point2D ConvertCoordinateToPosition(double latitude,double longitude){
+            long x,y;
+            if(latitude<30){
+                x = Math.round(25+(longitude - 123.7798)*19.8);//24+(x-123.7798)*20.393
+                y = Math.round(88+(28.451-latitude)*26.02);//89+(28.451-y)*26
+            }else{
+                x = Math.round(5+(longitude-128.8433)*20.393);//4+(x-128)*20.393
+                y = Math.round(20+(45.4883-latitude)*24.582);//18+(45.4883-lat)*24.582
+            }
+            return new Point2D(x,y);
+        }
+
     }
 
 }

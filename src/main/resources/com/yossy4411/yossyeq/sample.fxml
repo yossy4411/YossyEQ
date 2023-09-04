@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
+<StackPane xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.yossy4411.yossyeq.JavaFXApp">
+<Group id="root">
+    <Group/>
+<VBox xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" alignment="CENTER">
+    <!-- VBox内で要素を中央寄せに配置 -->
+    <Label fx:id="label" text="中央寄せされたテキスト"/>
+</VBox>
+</Group>
+</StackPane>
