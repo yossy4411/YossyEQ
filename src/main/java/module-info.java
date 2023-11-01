@@ -10,6 +10,7 @@ module com.yossy.yossyeq {
     requires java.desktop;
     requires java.net.http;
     requires org.apache.commons.net;
+    requires annotations;
 
 
     opens com.yossy4411.yossyeq to javafx.fxml;

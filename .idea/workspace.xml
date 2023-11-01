@@ -4,22 +4,55 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e62cc188-2d27-4f74-9ead-fb7d1460565e" name="変更" comment="Githubでビルドするために、依存関係を修正">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/JavaFXApp.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/test/ReplacementApp.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/20230817104451.jma_s.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/basemap.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/sample.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="e62cc188-2d27-4f74-9ead-fb7d1460565e" name="変更" comment="更新">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/NewAPP.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/test/KyoshinLatest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/Fonts/NotoSansJP-Black.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/Fonts/NotoSansJP-Bold.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/Fonts/NotoSansJP-ExtraBold.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/Fonts/NotoSansJP-ExtraLight.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/Fonts/NotoSansJP-Light.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/Fonts/NotoSansJP-Medium.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/Fonts/NotoSansJP-Regular.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/Fonts/NotoSansJP-SemiBold.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/Fonts/NotoSansJP-Thin.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/test/teststyle.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/CSVReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/test/CSVReader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/GetQuake.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/GetQuake.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/HelloApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/HelloController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/HelloController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/JavaFXApp.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/Map.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/test/ImageColorPicker.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/hello-view.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/kmoni.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/kmoni.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/P2PQuake.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/P2PQuake.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/test/ListSortIndexExample.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/test/ReplacementApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/test/ReplacementApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/test/test.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/test/test.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/test/testData.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/test/testData.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/yossy4411/yossyeq/test/testKyoshinData.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/test/testKyoshinData.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/WorldMq/ne_50m_land.cpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/WorldMq/ne_50m_land.dbf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/WorldMq/ne_50m_land.prj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/WorldMq/ne_50m_land.shp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/WorldMq/ne_50m_land.shx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/jp1/地震情報／細分区域.cpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/jp1/地震情報／細分区域.dbf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/jp1/地震情報／細分区域.qmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/jp1/地震情報／細分区域.shp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/jp1/地震情報／細分区域.shx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/jp1/地震情報／都道府県等.cpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/jp1/地震情報／都道府県等.dbf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/jp1/地震情報／都道府県等.prj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/jp1/地震情報／都道府県等.qmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/jp1/地震情報／都道府県等.shp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/jp1/地震情報／都道府県等.shx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/sample.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/sample.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/tsunami/津波予報区.shp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/tsunami/津波予報区.shp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/tsunami/津波予報区.shx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/yossy4411/yossyeq/tsunami/津波予報区.shx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/kyoshinMonitorPlaces.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/kyoshinMonitorPlaces.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,6 +80,7 @@
     <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="jar://$PROJECT_DIR$/../../../../Program Files/Java/jdk-20/lib/src.zip!/java.base/java/lang/Integer.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/main/resources/kyoshinMonitorPlaces.json" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -67,7 +101,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/yaido/IdeaProjects/YossyEQ/src/main/resources/com/yossy4411/yossyeq&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/yaido/IdeaProjects/YossyEQ/src/main/resources/com/yossy4411/yossyeq/tsunami&quot;,
     &quot;project.structure.last.edited&quot;: &quot;プロジェクト&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
@@ -77,24 +111,28 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\yaido\IdeaProjects\YossyEQ\src\main\resources\com\yossy4411\yossyeq" />
-      <recent name="C:\Users\yaido\IdeaProjects\YossyEQ\src\main\resources\com\yossy4411\yossyeq\jp1" />
-      <recent name="C:\Users\yaido\IdeaProjects\YossyEQ\src\main\resources" />
       <recent name="C:\Users\yaido\IdeaProjects\YossyEQ\src\main\resources\com\yossy4411\yossyeq\tsunami" />
+      <recent name="C:\Users\yaido\IdeaProjects\YossyEQ\src\main\resources\com\yossy4411\yossyeq\jp1" />
+      <recent name="C:\Users\yaido\IdeaProjects\YossyEQ\src\main\resources\com\yossy4411\yossyeq" />
+      <recent name="C:\Users\yaido\IdeaProjects\YossyEQ\src\main\resources" />
       <recent name="C:\Users\yaido\IdeaProjects\YossyEQ\src\main\resources\com\yossy4411\yossyeq\Lakes" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\yaido\IdeaProjects\YossyEQ\src\main\resources\com\yossy4411\yossyeq\test" />
       <recent name="C:\Users\yaido\IdeaProjects\YossyEQ\src\main\resources\com\yossy4411\yossyeq" />
       <recent name="C:\Users\yaido\IdeaProjects\YossyEQ\src\main\resources" />
       <recent name="C:\Users\yaido\IdeaProjects\YossyEQ\src\main\resources\com\yossy4411\yossyeq\jp1" />
       <recent name="C:\Users\yaido\IdeaProjects\YossyEQ\src\main\resources\com\yossy4411\yossyeq\WorldMq" />
-      <recent name="C:\Users\yaido\IdeaProjects\YossyEQ" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.yossy4411.yossyeq" />
+      <recent name="com.yossy4411.yossyeq.test" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.yossy4411.yossyeq" />
     </key>
   </component>
-  <component name="RunManager" selected="アプリケーション.Map">
+  <component name="RunManager" selected="アプリケーション.newMAP">
     <configuration name="配置App" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="com.yossy4411.yossyeq.test.ReplacementApp" />
       <module name="YossyEQ" />
@@ -102,7 +140,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Map" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="Map" type="Application" factoryName="Application" folderName="実行ファイル" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.yossy4411.yossyeq.Map" />
       <module name="YossyEQ" />
       <extension name="coverage">
@@ -115,15 +153,18 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="newMAP" type="Application" factoryName="Application" folderName="実行ファイル">
+      <option name="MAIN_CLASS_NAME" value="com.yossy4411.yossyeq.NewAPP" />
+      <module name="YossyEQ" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <list>
-      <item itemvalue="アプリケーション.配置App" />
       <item itemvalue="アプリケーション.Map" />
+      <item itemvalue="アプリケーション.newMAP" />
+      <item itemvalue="アプリケーション.配置App" />
     </list>
-    <recent_temporary>
-      <list>
-        <item itemvalue="アプリケーション.Map" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="アプリケーションレベル" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
@@ -313,7 +354,15 @@
       <option name="project" value="LOCAL" />
       <updated>1691760928804</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="更新">
+      <option name="closed" value="true" />
+      <created>1693832772708</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1693832772708</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -357,17 +406,8 @@
     <MESSAGE value="依存関係が多すぎる問題の修正" />
     <MESSAGE value="maven.ymlの修正" />
     <MESSAGE value="Githubでビルドするために、依存関係を修正" />
-    <option name="LAST_COMMIT_MESSAGE" value="Githubでビルドするために、依存関係を修正" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <breakpoint enabled="true" type="java-exception">
-          <properties class="java.lang.IllegalArgumentException" package="java.lang" />
-          <option name="timeStamp" value="6" />
-        </breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="更新" />
+    <option name="LAST_COMMIT_MESSAGE" value="更新" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

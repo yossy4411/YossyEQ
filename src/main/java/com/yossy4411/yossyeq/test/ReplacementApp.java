@@ -35,9 +35,7 @@ public class ReplacementApp extends Application {
         addPoint(root);
         // シーンの作成
         Scene scene = new Scene(root, image.getWidth(), image.getHeight());
-        scene.setOnMousePressed(event -> {
-            f = new Point2D(event.getX()-root.getTranslateX(),event.getY()- root.getTranslateY());
-        });
+        scene.setOnMousePressed(event -> f = new Point2D(event.getX()-root.getTranslateX(),event.getY()- root.getTranslateY()));
         scene.setOnScroll(event -> {
             double delta = Math.pow(1.01,event.getDeltaY());
             root.setScaleX(root.getScaleX() * delta);

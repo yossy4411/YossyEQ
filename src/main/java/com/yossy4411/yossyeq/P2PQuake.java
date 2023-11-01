@@ -43,7 +43,7 @@ public class P2PQuake {
                     String[] parts = response.split(" ");
                     int code = Integer.parseInt(response.split(" ")[0]);
                     if (code == 211) {
-                        out.println("131 1 0.32:YossyEQ:Beta");
+                        out.println("131 1 0.32:YossyEQ:0.0.1a");
                     } else if (code == 212) {
                         out.println("123 1 " + peerId + ":" + ConnectedPeers.size());
                     } else if (code == 243) {
@@ -133,7 +133,7 @@ public class P2PQuake {
                 receivedTime = LocalDateTime.now();
                 int code = Integer.parseInt(response.split(" ")[0]);
                 if (code == 614) {
-                    out.println("634 1 0.32:YossyEQ:Beta");
+                    out.println("634 1 0.32:YossyEQ:0.0.1a");
                     System.out.println("ピアにシステムバージョンを送信しました。");
                 } else if (code == 612) {
                     out.println("632 1" + peerId);
@@ -157,6 +157,7 @@ public class P2PQuake {
     }
     private static void relay(int peerID,PrintWriter out) throws IOException {
         List<String> buffers = new ArrayList<>();
+        List<Long> bufferTime = new ArrayList<>();
         ExecutorService executor = Executors.newSingleThreadExecutor();
         executor.submit(() -> {
             System.out.println("ピアへの送信の準備が完了しました。");
@@ -166,10 +167,18 @@ public class P2PQuake {
                     if (!sendData.isEmpty()) {
                         if (!buffers.contains(sendData.get(2))) {
                             buffers.add(sendData.get(2));
-                            LOGGER.info(peerID + "のバッファに追加しました");
+                            bufferTime.add(System.currentTimeMillis());
                             if (Integer.parseInt(sendData.get(0)) != peerID) {
                                 out.println(sendData.get(1));
                                 LOGGER.info(sendData.get(1) + "を" + peerID + "に送信しました。");
+                            }
+                            for(int i = 0; i < bufferTime.size(); i++){
+                                long t = bufferTime.get(i);
+                                if (System.currentTimeMillis() - t > 10000){
+                                    bufferTime.remove(i);
+                                    buffers.remove(i);
+
+                                }
                             }
                         }
                     }

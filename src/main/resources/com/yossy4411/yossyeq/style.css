@@ -1,0 +1,145 @@
+@font-face {
+    font-family: "Noto Sans JP";
+    src: url("Fonts/NotoSansJP-Regular.ttf");
+}
+
+.label {
+    -fx-font-family: "Noto Sans JP";
+}
+
+.s0 {
+    -fx-fill: #818188;
+    -fx-stroke: #4b4b51
+}
+
+.s10 {
+    -fx-fill: #38add7;
+    -fx-stroke: #237c9d
+}
+
+.s20 {
+    -fx-fill: #5bd08c;
+    -fx-stroke: #38a766
+}
+
+.s30 {
+    -fx-fill: #edc95d;
+    -fx-stroke: #aa8109
+}
+
+.s40 {
+    -fx-fill: #ea8016;
+    -fx-stroke: #aa5907
+}
+
+.s45 {
+    -fx-fill: #ea0f0f;
+    -fx-stroke: #790404
+}
+
+.s50 {
+    -fx-fill: #b60606;
+    -fx-stroke: #851111
+}
+
+.s55 {
+    -fx-fill: #bf2369;
+    -fx-stroke: #601436
+}
+
+.s60 {
+    -fx-fill: #b70bc0;
+    -fx-stroke: #58105c
+}
+
+.s70 {
+    -fx-fill: #640879;
+    -fx-stroke: #f6f350
+}
+
+.rightUI .scroll-pane {
+    -fx-background-color: #00000000;
+    -fx-vbar-policy: always;
+    -fx-hbar-policy: never
+}
+
+.rightUI .scroll-pane .viewport {
+    -fx-background-color: #96969680
+}
+
+.rightUI .scroll-bar:vertical {
+    -fx-background-color: #6f6f6f88
+}
+
+.rightUI .scroll-pane .scroll-bar:vertical .thumb {
+    -fx-background-color: #dddddd7e
+}
+
+.rightUI .text {
+    -fx-text-fill: #575757
+}
+.rightUI .magnitude {
+    -fx-font-size: 30;
+    -fx-text-alignment: right;
+}
+.rightUI .shindo {
+    -fx-arc-width: 5;
+    -fx-arc-height: 5;
+    -fx-stroke-width: 1;
+
+}
+
+.map {
+    -fx-fill: #C8C8C8;
+    -fx-stroke: #8b8b8b
+}
+
+.dark-mode .map {
+    -fx-fill: #404040FF
+}
+
+.tsunami-3 {
+    -fx-stroke: #eb0fff
+}
+.tsunami {
+    -fx-stroke-line-cap: round;
+    -fx-stroke-line-join: round;
+}
+
+.eew {
+    -fx-stroke: #ff0000b2;
+    -fx-fill: #ff00002a;
+    -fx-stroke-line-join: round;
+    -fx-stroke-line-cap: round;
+}
+
+.non-eew {
+    -fx-stroke: dimgray
+}
+
+.dark-mode .non-eew {
+    -fx-stroke: whitesmoke
+}
+
+.clear {
+    -fx-stroke: none;
+    -fx-fill: none
+}
+
+.qtext {
+    -fx-fill: #141414
+}
+.kmoni-text{
+    -fx-fill: #000;
+    -fx-font-size: 16;
+}
+
+.world {
+    -fx-fill: #9D9D9D;
+    -fx-stroke: gray
+}
+
+.dark-mode .world {
+    -fx-fill: gray;
+    -fx-stroke: darkgray
+}

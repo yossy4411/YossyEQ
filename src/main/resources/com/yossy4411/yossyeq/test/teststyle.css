@@ -1,0 +1,25 @@
+/* styles.css */
+
+/* ダークモード用のスタイル */
+.root {
+    -fx-background-color: #000; /* ダークモードの背景色 */
+    -fx-text-fill: #fff; /* ダークモードのテキスト色 */
+}
+
+/* ダークモード用のボタンスタイル */
+.custom-button {
+    -fx-background-color: #333; /* ダークモードのボタン背景色 */
+    -fx-text-fill: #fff; /* ダークモードのボタンテキスト色 */
+}
+
+/* ライトモード用のスタイル */
+.light-mode {
+    -fx-background-color: #fff; /* ライトモードの背景色 */
+    -fx-text-fill: #000; /* ライトモードのテキスト色 */
+}
+
+/* ライトモード用のボタンスタイル */
+.light-mode .custom-button {
+    -fx-background-color: #ccc; /* ライトモードのボタン背景色 */
+    -fx-text-fill: #000; /* ライトモードのボタンテキスト色 */
+}

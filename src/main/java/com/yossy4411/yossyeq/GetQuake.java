@@ -73,7 +73,7 @@ public class GetQuake {
     }
     public static BufferedImage getKyoshinMonitor(long offsetMilli) {
         //引数"timestamp"には、巻き戻す時間をミリ秒形式で指定してください
-        LocalDateTime now = LocalDateTime.now().minus(offsetMilli+1200, ChronoUnit.MILLIS);
+        LocalDateTime now = LocalDateTime.now().minus(offsetMilli+260, ChronoUnit.MILLIS);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
         String formattedTime = now.format(formatter);
         formatter =  DateTimeFormatter.ofPattern("yyyyMMdd");
@@ -81,7 +81,6 @@ public class GetQuake {
         try {
             return ImageIO.read(URI.create("http://www.kmoni.bosai.go.jp/data/map_img/RealTimeImg/jma_s/"+formattedDate+"/"+formattedTime+".jma_s.gif").toURL());
         } catch (IIOException e) {
-            e.printStackTrace();
             return null;
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -95,13 +94,41 @@ public class GetQuake {
         formatter =  DateTimeFormatter.ofPattern("yyyyMMdd");
         String formattedDate = now.format(formatter);
         try {
-            return ImageIO.read(URI.create("https://smi.lmoniexp.bosai.go.jp/data/map_img/EstShindoImg/eew/20230809/20230809125025.eew.gif").toURL());
+            return ImageIO.read(URI.create("https://smi.lmoniexp.bosai.go.jp/data/map_img/EstShindoImg/eew/20220316/20220316233651.eew.gif").toURL());
         } catch (IIOException e) {
-            e.printStackTrace();
             return null;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+    public static long waitforKmoni(long timedelay){
+        int d = (int) timedelay;
+        if(getKyoshinMonitor(d) == null){
+            for (int i = 0; i < 40; i++) {
+                d += 100;
+                if (getKyoshinMonitor(d) != null) {
+                    for (i = 0; i < 5; i++) {
+                        d -=20;
+                        if (getKyoshinMonitor(d)==null){
+                            return d+20;
+                        }
+                    }
+                }
+            }
+        }else {
+            for (int i = 0; i < 40; i++) {
+                d -= 100;
+                if (getKyoshinMonitor(d) != null) {
+                    for (i = 0; i < 5; i++) {
+                        d +=20;
+                        if (getKyoshinMonitor(d)==null){
+                            return d-20;
+                        }
+                    }
+                }
+            }
+        }
+        return -1;
     }
     public static BufferedImage getPGA(long offsetMilli) {
         //引数"timestamp"には、巻き戻す時間をミリ秒形式で指定してください
@@ -113,7 +140,6 @@ public class GetQuake {
         try {
             return ImageIO.read(URI.create("https://smi.lmoniexp.bosai.go.jp/data/map_img/RealTimeImg/acmap_s/"+formattedDate+"/"+formattedTime+".acmap_s.gif").toURL());
         } catch (IIOException e) {
-            e.printStackTrace();
             return null;
         } catch (IOException e) {
             throw new RuntimeException(e);
