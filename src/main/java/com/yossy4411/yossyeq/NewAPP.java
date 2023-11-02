@@ -33,9 +33,9 @@ import java.util.*;
 
 public class NewAPP extends Application {
 
-    private double scaleFactor = 1; // 初期拡大率
+    private double scaleFactor = 2; // 初期拡大率
     private double offsetX, offsetY;
-    private Group shape;
+    private Pane shape;
     private Scene scene;
     private final List<Group> Polygons = new ArrayList<>();
     private final List<List<String>> Names = new ArrayList<>();
@@ -51,10 +51,10 @@ public class NewAPP extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
 
-        shape = new Group();
+        shape = new Pane();
 
         Pane mapRoot =new StackPane(shape);
-        mapRoot.setMaxSize(MapScale[0],MapScale[1]);
+        shape.setMaxSize(MapScale[0],MapScale[1]);
         Pane root = new StackPane(mapRoot);
         scene = new Scene(root, 1001.2, 700);
 
