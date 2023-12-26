@@ -1,8 +1,13 @@
 # YossyEQ
 ## 概要
+防災情報（主に地震情報）をわかりやすく表示するアプリケーション。
+### 表示できる情報
+
+
+## クレジット
+
 ### 使用させてもらったファイル・サイト
-気象庁　地震情報・津波GISデータ
-https://www.data.jma.go.jp/developer/gis.html
+[気象庁　地震情報・津波GISデータ](https://www.data.jma.go.jp/developer/gis.html)
 
 震度色のリスト https://github.com/ingen084/KyoshinShindoColorMap
 

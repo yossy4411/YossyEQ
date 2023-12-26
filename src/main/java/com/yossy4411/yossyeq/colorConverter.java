@@ -6,38 +6,33 @@ import java.util.Arrays;
 
 public class colorConverter {
 
-    /// スケールと震度に変換します。
-    public static double ConvertScaleToIntensity(double scale) {
-        return (scale * 10 - 3);
-    }
-    public static double ConvertIntensityToScale(double intensity) {
-        return ((intensity + 3) / 10);
+    public static class Scale{
+        private final double scale;
+        public Scale(double scale){
+            this.scale = scale;
+        }
+        /// スケールと震度に変換します。
+        public double toIntensity() {
+            return (scale * 10 - 3);
+        }
+
+        /// スケールとPGA(最大加速度)に変換します。
+        public double toPga() {
+            return Math.pow(10, 5 * scale - 2);
+        }
+
+        /// スケールとPGV(最大速度)に変換します。
+        /// 速度応答にも使用できます。
+        public double toPgv() {
+            return Math.pow(10, 5 * scale - 3);
+        }
+
+        /// スケールとPGD(最大変位)に変換します。
+        public double toPgd(){
+            return Math.pow(10,5 * scale - 4);
+        }
     }
 
-    /// スケールとPGA(最大加速度)に変換します。
-    public static double ConvertScaleToPga(double scale) {
-        return Math.pow(10, 5 * scale - 2);
-    }
-    public static double ConvertPgaToScale(double pga) {
-        return ((Math.log10(pga) + 2) / 5);
-    }
-
-    /// スケールとPGV(最大速度)に変換します。
-    /// 速度応答にも使用できます。
-    public static double ConvertScaleToPgv(double scale) {
-        return Math.pow(10, 5 * scale - 3);
-    }
-    public static double ConvertPgvToScale(double pgv) {
-        return (Math.log10(pgv) + 3) / 5;
-    }
-
-    /// スケールとPGD(最大変位)に変換します。
-    public static double ConvertScaleToPgd(double scale){
-			return Math.pow(10,5 * scale - 4);
-    }
-    public static double ConvertPgdToScale(double pgd){
-        return (Math.log10(pgd) + 4) / 5;
-    }
 
     /// 多項式補完を使用して色をスケールに変換します。
     /// from: https://qiita.com/NoneType1/items/a4d2cf932e20b56ca444

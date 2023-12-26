@@ -200,11 +200,11 @@ public class GetQuake {
         public static Point2D ConvertCoordinateToPosition(double latitude,double longitude){
             long x,y;
             if(latitude<30){
-                x = Math.round(25+(longitude - 123.7798)*19.8);//24+(x-123.7798)*20.393
-                y = Math.round(88+(28.451-latitude)*26.02);//89+(28.451-y)*26
+                x = Math.round(60.5+(longitude - 125.5)*20);
+                y = Math.round(162+(25.6-latitude)*25.7);
             }else{
-                x = Math.round(5+(longitude-128.8433)*20.393);//4+(x-128)*20.393
-                y = Math.round(20+(45.4883-latitude)*24.582);//18+(45.4883-lat)*24.582
+                x = Math.round(5+(longitude-128.8433)*20.393);
+                y = Math.round(21+(45.4883-latitude)*24.582);
             }
             return new Point2D(x,y);
         }

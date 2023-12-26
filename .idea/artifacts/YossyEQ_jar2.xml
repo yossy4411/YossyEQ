@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact name="YossyEQ:jar2">
+    <output-path>$PROJECT_DIR$/out/artifacts/YossyEQ_jar2</output-path>
+    <root id="root">
+      <element id="archive" name="eew.jar">
+        <element id="module-output" name="YossyEQ" />
+        <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/slf4j/slf4j-api/1.7.32/slf4j-api-1.7.32.jar" path-in-jar="/" />
+        <element id="extracted-dir" path="$MAVEN_REPOSITORY$/ch/qos/logback/logback-core/1.2.9/logback-core-1.2.9.jar" path-in-jar="/" />
+        <element id="extracted-dir" path="$MAVEN_REPOSITORY$/ch/qos/logback/logback-classic/1.2.9/logback-classic-1.2.9.jar" path-in-jar="/" />
+        <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/java-websocket/Java-WebSocket/1.5.4/Java-WebSocket-1.5.4.jar" path-in-jar="/" />
+      </element>
+    </root>
+  </artifact>
+</component>

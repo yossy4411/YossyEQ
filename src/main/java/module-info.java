@@ -11,10 +11,14 @@ module com.yossy.yossyeq {
     requires java.net.http;
     requires org.apache.commons.net;
     requires annotations;
+    requires org.java_websocket;
+    requires org.geotools.metadata;
 
 
     opens com.yossy4411.yossyeq to javafx.fxml;
     exports com.yossy4411.yossyeq;
     opens com.yossy4411.yossyeq.test to javafx.fxml;
     exports com.yossy4411.yossyeq.test;
+    exports com.yossy4411.yossyeq.old;
+    opens com.yossy4411.yossyeq.old to javafx.fxml;
 }

@@ -93,7 +93,7 @@ public class Map extends Application {
 
         /*ここから*/
         /**/ addPoint("src/main/resources/kyoshinMonitorPlaces.json", "/Location/Latitude", "/Location/Longitude", "/Name", new String[]{"/IsSuspended", "/Point/X", "/Point/Y"});
-        /**/ calcFromShapefile("src/main/resources/com/yossy4411/yossyeq/WorldMq/ne_50m_land.shp");
+        /**/ calcFromShapefile("src/main/resources/com/yossy4411/yossyeq/world/ne_10m_country.shp");
         /**/ calcFromShapefile("src/main/resources/com/yossy4411/yossyeq/jp-report/地震情報／細分区域.shp");
         /**/ calcFromShapefile("src/main/resources/com/yossy4411/yossyeq/jp-eew/緊急地震速報／都道府県等.shp");
         /**/ calcTsunami();
